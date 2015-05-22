@@ -1,35 +1,35 @@
 //
-//  ViewController.swift
+//  TweetsViewController.swift
 //  Twitter
 //
-//  Created by Ian on 5/20/15.
+//  Created by Ian on 5/21/15.
 //  Copyright (c) 2015 Ian Bari. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class TweetsViewController: UIViewController {
+  var tweets: [Tweet]?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+      self.tweets = tweets
+      //tableView.reload()
+    })
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  @IBAction func onLogin(sender: AnyObject) {
-    TwitterClient.sharedInstance.loginWithCompletion() {
-      (user: User?, error: NSError?) in
-      if user != nil {
-        self.performSegueWithIdentifier("loginSegue", sender: self)
-      } else {
-        //handle error
-        println("Login error: \(error)")
-      }
-    }
-  }
 
+  @IBAction func onLogout(sender: AnyObject) {
+    User.currentUser?.logout()
+    println("Clicked logout")
+  }
+  
   /*
   // MARK: - Navigation
   
