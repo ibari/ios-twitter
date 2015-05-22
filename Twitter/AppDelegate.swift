@@ -19,10 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
     
     if User.currentUser != nil {
-      // got to logged in view (timeline)
       println("Current user detected \(User.currentUser?.name)")
+      
       var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! UIViewController
-      window?.rootViewController =  vc
+      
+      let navigationController = UINavigationController(rootViewController: vc)
+      window?.rootViewController = navigationController
     }
     
     return true

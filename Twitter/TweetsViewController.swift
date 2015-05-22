@@ -9,14 +9,21 @@
 import UIKit
 
 class TweetsViewController: UIViewController {
+  @IBOutlet weak var tableView: UITableView!
+  
   var tweets: [Tweet]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 100
+    
+    TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
       self.tweets = tweets
-      //tableView.reload()
+      self.tableView.reloadData()
     })
   }
   
@@ -39,4 +46,26 @@ class TweetsViewController: UIViewController {
   // Pass the selected object to the new view controller.
   }
   */
+}
+
+extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+    
+    cell.tweet = tweets![indexPath.row]
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tweets != nil {
+      return tweets!.count
+    } else {
+      return 0
+    }
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  }
 }
