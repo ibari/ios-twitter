@@ -29,7 +29,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         var tweets = Tweet.tweetWithArray(response as! [NSDictionary])
         
         completion(tweets: tweets, error: nil)
-        println(response)
+        //println(response)
       }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         println("Failed to get timeline")
         completion(tweets: nil, error: error)

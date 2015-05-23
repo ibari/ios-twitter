@@ -51,8 +51,14 @@ class TweetsViewController: UIViewController {
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+    let tweet: Tweet = tweets![indexPath.row]
     
-    cell.tweet = tweets![indexPath.row]
+    cell.tweet = tweet
+    
+    /*if tweet.retweeted == false {
+      cell.retweetImageView.hidden = true
+      cell.retweetLabel.hidden = true
+    }*/
     
     return cell
   }
