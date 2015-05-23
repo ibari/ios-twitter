@@ -22,6 +22,7 @@ class TweetCell: UITableViewCell {
       profileImageView.setImageWithURL(tweet.user!.profileImageURL)
       nameLabel.text = tweet.user!.name
       screenNameLabel.text = "@\(tweet.user!.screenName!)"
+      tweetTextLabel.text = tweet.text
       
       let formatter = NSDateFormatter()
       formatter.dateFormat = "MMM d"
@@ -29,7 +30,7 @@ class TweetCell: UITableViewCell {
       
       if tweet.retweeted == true {
         retweetImageView.image = UIImage(named: "retweet_on")
-        tweetTextLabel.text = tweet.user!.name
+        retweetLabel.text = tweet.user!.name
       } else {
         retweetLabel.text = ""
       }
@@ -55,7 +56,5 @@ class TweetCell: UITableViewCell {
   
   override func setSelected(selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
-    
-    // Configure the view for the selected state
   }
 }

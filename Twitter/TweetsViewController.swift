@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController {
   
   var tweets: [Tweet]?
   var refreshControl: UIRefreshControl!
+  let tweetSegueIdentifier = "ShowTweetSegue"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,29 +59,26 @@ class TweetsViewController: UIViewController {
     println("Clicked logout")
   }
   
-  /*
   // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
+    if segue.identifier == tweetSegueIdentifier {
+      if let navigation = segue.destinationViewController as? UINavigationController {
+        if let destination = navigation.viewControllers.first as? TweetViewController {
+          if let index = tableView.indexPathForSelectedRow()?.row {
+            destination.tweet = tweets![index]
+          }
+        }
+      }
+    }
   }
-  */
 }
 
 extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-    let tweet: Tweet = tweets![indexPath.row]
     
-    cell.tweet = tweet
-    
-    /*if tweet.retweeted == false {
-      cell.retweetImageView.hidden = true
-      cell.retweetLabel.hidden = true
-    }*/
-    
+    cell.tweet = tweets![indexPath.row]
+
     return cell
   }
   
@@ -93,6 +91,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    self.performSegueWithIdentifier(tweetSegueIdentifier, sender: nil)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
 }
