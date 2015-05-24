@@ -35,7 +35,6 @@ class TweetsViewController: UIViewController {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   func delay(delay:Double, closure:()->()) {
@@ -56,7 +55,6 @@ class TweetsViewController: UIViewController {
 
   @IBAction func onLogout(sender: AnyObject) {
     User.currentUser?.logout()
-    println("Clicked logout")
   }
   
   // MARK: - Navigation
@@ -64,8 +62,13 @@ class TweetsViewController: UIViewController {
     if segue.identifier == tweetSegueIdentifier {
       if let navigation = segue.destinationViewController as? UINavigationController {
         if let destination = navigation.viewControllers.first as? TweetViewController {
-          if let index = tableView.indexPathForSelectedRow()?.row {
-            destination.tweet = tweets![index]
+          if let indexPath = tableView.indexPathForSelectedRow() {
+            // didSelectRowAtIndexPath event
+            destination.tweet = tweets![indexPath.row]
+          } else if let indexPath = tableView.indexPathForCell((sender as? TweetCell)!) {
+            // reply button event
+            destination.isReply = true
+            destination.tweet = tweets![indexPath.row]
           }
         }
       }
@@ -78,6 +81,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
     
     cell.tweet = tweets![indexPath.row]
+    cell.delegate = self
 
     return cell
   }
@@ -93,5 +97,11 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     self.performSegueWithIdentifier(tweetSegueIdentifier, sender: nil)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  }
+}
+
+extension TweetsViewController: TweetCellDelegate {
+  func tweetCell(tweetCell: TweetCell) {
+    self.performSegueWithIdentifier(tweetSegueIdentifier, sender: tweetCell)
   }
 }

@@ -27,12 +27,42 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     GET("1.1/statuses/home_timeline.json", parameters: params
       , success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
         var tweets = Tweet.tweetWithArray(response as! [NSDictionary])
-        
         completion(tweets: tweets, error: nil)
-        //println(response)
       }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         println("Failed to get timeline")
         completion(tweets: nil, error: error)
+    })
+  }
+  
+  func updateWithParams(params: NSDictionary?, completion: (response: AnyObject?, error: NSError?) -> ()) {
+    POST("1.1/statuses/update.json", parameters: params
+      , success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        completion(response: response, error: nil)
+      }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        println("Failed to post status: \(error)")
+        completion(response: nil, error: error)
+    })
+  }
+  
+  func retweetWithParams(id: Int?, params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+    POST("1.1/statuses/retweet/\(id!).json", parameters: params
+      , success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        var tweet = Tweet(dictionary: response as! NSDictionary)
+        completion(tweet: tweet, error: nil)
+      }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        println("Failed to retweet: \(error)")
+        completion(tweet: nil, error: error)
+    })
+  }
+  
+  func favoritesWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+    POST("1.1/favorites/create.json", parameters: params
+      , success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        var tweet = Tweet(dictionary: response as! NSDictionary)
+        completion(tweet: tweet, error: nil)
+      }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        println("Failed to favorite: \(error)")
+        completion(tweet: nil, error: error)
     })
   }
   

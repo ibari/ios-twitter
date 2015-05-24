@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol TweetCellDelegate {
+  optional func tweetCell(tweetCell: TweetCell)
+}
+
 class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetImageView: UIImageView!
   @IBOutlet weak var retweetLabel: UILabel!
@@ -16,6 +20,11 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var screenNameLabel: UILabel!
   @IBOutlet weak var createdAtLabel: UILabel!
   @IBOutlet weak var tweetTextLabel: UILabel!
+  @IBOutlet weak var replyButton: UIButton!
+  @IBOutlet weak var retweetButton: UIButton!
+  @IBOutlet weak var favoriteButton: UIButton!
+  
+  weak var delegate: TweetCellDelegate?
   
   var tweet: Tweet! {
     didSet {
@@ -28,11 +37,20 @@ class TweetCell: UITableViewCell {
       formatter.dateFormat = "MMM d"
       createdAtLabel.text = formatter.stringFromDate(tweet.createdAt!)
       
-      if tweet.retweeted == true {
-        retweetImageView.image = UIImage(named: "retweet_on")
-        retweetLabel.text = tweet.user!.name
-      } else {
-        retweetLabel.text = ""
+      if let retweeted = tweet.retweeted {
+        if retweeted == true {
+          retweetImageView.image = UIImage(named: "retweet_on")
+          retweetLabel.text = tweet.user!.name
+          retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
+        } else {
+          retweetLabel.text = ""
+        }
+      }
+      
+      if let favorited = tweet.favorited {
+        if favorited == true {
+          favoriteButton.setImage(UIImage(named: "favorite_on"), forState: .Normal)
+        }
       }
     }
   }
@@ -45,6 +63,8 @@ class TweetCell: UITableViewCell {
     
     nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+    
+    replyButton.addTarget(self, action: "onReplyButton", forControlEvents: UIControlEvents.TouchUpInside)
   }
   
   override func layoutSubviews() {
@@ -56,5 +76,9 @@ class TweetCell: UITableViewCell {
   
   override func setSelected(selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
+  }
+  
+  func onReplyButton() {
+    delegate?.tweetCell?(self)
   }
 }
