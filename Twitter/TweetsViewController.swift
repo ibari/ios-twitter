@@ -61,6 +61,13 @@ class TweetsViewController: UIViewController {
     User.currentUser?.logout()
   }
   
+  @IBAction func onCompose(sender: AnyObject) {
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var composeViewController = storyboard.instantiateViewControllerWithIdentifier("ComposeViewController") as! ComposeViewController
+    
+    self.navigationController?.pushViewController(composeViewController, animated: true)
+  }
+  
   // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == tweetSegueIdentifier {

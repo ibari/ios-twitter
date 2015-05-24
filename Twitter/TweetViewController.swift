@@ -41,6 +41,7 @@ class TweetViewController: UIViewController {
     } else if let retweeted = tweet.retweeted {
       if retweeted == true {
         retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
+        retweetButton.enabled = false
       }
     }
     
@@ -89,6 +90,13 @@ class TweetViewController: UIViewController {
   
   @IBAction func onHomeButton(sender: AnyObject) {
     pushTweetsViewController()
+  }
+  
+  @IBAction func onCompose(sender: AnyObject) {
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var composeViewController = storyboard.instantiateViewControllerWithIdentifier("ComposeViewController") as! ComposeViewController
+    
+    self.navigationController?.pushViewController(composeViewController, animated: true)
   }
   
   func pushTweetsViewController() {

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
     
     if User.currentUser != nil {
-      println("Current user detected \(User.currentUser?.name)")
+      println("Current user: \(User.currentUser!.name!)")
       
       var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
       

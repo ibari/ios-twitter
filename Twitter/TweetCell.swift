@@ -44,6 +44,7 @@ class TweetCell: UITableViewCell {
           retweetImageView.image = UIImage(named: "retweet_on")
           retweetLabel.text = "\(User.currentUser!.name!) retweeted"
           retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
+          retweetButton.enabled = false
         } else {
           retweetImageView.hidden = true
           retweetLabel.hidden = true
