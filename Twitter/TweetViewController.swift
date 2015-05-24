@@ -36,7 +36,9 @@ class TweetViewController: UIViewController {
       replyButton.enabled = false
     }
     
-    if let retweeted = tweet.retweeted {
+    if User.currentUser!.screenName! == tweet.user!.screenName! {
+      retweetButton.enabled = false
+    } else if let retweeted = tweet.retweeted {
       if retweeted == true {
         retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
       }
@@ -74,10 +76,10 @@ class TweetViewController: UIViewController {
     tapRecognizer.addTarget(self, action: "didTapView")
     self.view.addGestureRecognizer(tapRecognizer)
     
-    replyButton.addTarget(self, action: "onReplyButton", forControlEvents: UIControlEvents.TouchUpInside)
-    retweetButton.addTarget(self, action: "onRetweetButton", forControlEvents: UIControlEvents.TouchUpInside)
-    favoriteButton.addTarget(self, action: "onFavoriteButton", forControlEvents: UIControlEvents.TouchUpInside)
-    tweetButton.addTarget(self, action: "onTweetButton", forControlEvents: UIControlEvents.TouchUpInside)
+    replyButton.addTarget(self, action: "onReply", forControlEvents: UIControlEvents.TouchUpInside)
+    retweetButton.addTarget(self, action: "onRetweet", forControlEvents: UIControlEvents.TouchUpInside)
+    favoriteButton.addTarget(self, action: "onFavorite", forControlEvents: UIControlEvents.TouchUpInside)
+    tweetButton.addTarget(self, action: "onTweet", forControlEvents: UIControlEvents.TouchUpInside)
   }
   
   override func didReceiveMemoryWarning() {
@@ -86,34 +88,41 @@ class TweetViewController: UIViewController {
   }
   
   @IBAction func onHomeButton(sender: AnyObject) {
-    dismissViewControllerAnimated(true, completion: nil)
+    pushTweetsViewController()
   }
   
-  func onReplyButton() {
+  func pushTweetsViewController() {
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+    
+    self.navigationController?.pushViewController(tweetsViewController, animated: true)
+  }
+  
+  func onReply() {
     replyView.hidden = false
     replyButton.enabled = false
   }
   
-  func onRetweetButton() {
-    TwitterClient.sharedInstance.retweetWithParams(tweet.id!, params: nil, completion: { (tweet, error) -> () in
+  func onRetweet() {
+    TwitterClient.sharedInstance.retweetWithParams(tweet.id!, params: nil, completion: { (status, error) -> () in
       if error == nil {
         self.retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
       }
     })
   }
   
-  func onFavoriteButton() {
-    TwitterClient.sharedInstance.favoritesWithParams(["id" : tweet.id!], completion: { (tweet, error) -> () in
+  func onFavorite() {
+    TwitterClient.sharedInstance.favoritesWithParams(["id" : tweet.id!], completion: { (status, error) -> () in
       if error == nil {
         self.favoriteButton.setImage(UIImage(named: "favorite_on"), forState: .Normal)
       }
     })
   }
   
-  func onTweetButton() {
-    TwitterClient.sharedInstance.updateWithParams(["status" : tweetTextView.text, "in_reply_to_status_id" : tweet.id!], completion: { (response, error) -> () in
+  func onTweet() {
+    TwitterClient.sharedInstance.updateWithParams(["status" : tweetTextView.text, "in_reply_to_status_id" : tweet.id!], completion: { (status, error) -> () in
       self.tweetTextView.resignFirstResponder()
-      self.dismissViewControllerAnimated(true, completion: nil)
+      self.pushTweetsViewController()
     })
   }
   

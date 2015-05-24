@@ -18,6 +18,8 @@ class TweetsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    
     tableView.dataSource = self
     tableView.delegate = self
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -30,6 +32,8 @@ class TweetsViewController: UIViewController {
     TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
       self.tweets = tweets
       self.tableView.reloadData()
+      
+      MBProgressHUD.hideHUDForView(self.view, animated: true)
     })
   }
   
@@ -103,5 +107,21 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 extension TweetsViewController: TweetCellDelegate {
   func tweetCell(tweetCell: TweetCell) {
     self.performSegueWithIdentifier(tweetSegueIdentifier, sender: tweetCell)
+  }
+  
+  func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didRetweetStatus statusId: Int) {
+    TwitterClient.sharedInstance.retweetWithParams(statusId, params: nil, completion: { (status, error) -> () in
+      if error == nil {
+        button.setImage(UIImage(named: "retweet_on"), forState: .Normal)
+      }
+    })
+  }
+  
+  func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didFavoriteStatus statusId: Int) {
+    TwitterClient.sharedInstance.favoritesWithParams(["id" : statusId], completion: { (status, error) -> () in
+      if error == nil {
+        button.setImage(UIImage(named: "favorite_on"), forState: .Normal)
+      }
+    })
   }
 }

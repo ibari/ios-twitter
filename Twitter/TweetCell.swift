@@ -10,6 +10,8 @@ import UIKit
 
 @objc protocol TweetCellDelegate {
   optional func tweetCell(tweetCell: TweetCell)
+  optional func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didRetweetStatus statusId: Int)
+  optional func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didFavoriteStatus statusId: Int)
 }
 
 class TweetCell: UITableViewCell {
@@ -40,11 +42,16 @@ class TweetCell: UITableViewCell {
       if let retweeted = tweet.retweeted {
         if retweeted == true {
           retweetImageView.image = UIImage(named: "retweet_on")
-          retweetLabel.text = tweet.user!.name
+          retweetLabel.text = "\(User.currentUser!.name!) retweeted"
           retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
         } else {
-          retweetLabel.text = ""
+          retweetImageView.hidden = true
+          retweetLabel.hidden = true
         }
+      }
+      
+      if User.currentUser!.screenName! == tweet.user!.screenName! {
+        retweetButton.enabled = false
       }
       
       if let favorited = tweet.favorited {
@@ -64,7 +71,9 @@ class TweetCell: UITableViewCell {
     nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
     
-    replyButton.addTarget(self, action: "onReplyButton", forControlEvents: UIControlEvents.TouchUpInside)
+    replyButton.addTarget(self, action: "onReply", forControlEvents: UIControlEvents.TouchUpInside)
+    retweetButton.addTarget(self, action: "onRetweet", forControlEvents: UIControlEvents.TouchUpInside)
+    favoriteButton.addTarget(self, action: "onFavorite", forControlEvents: UIControlEvents.TouchUpInside)
   }
   
   override func layoutSubviews() {
@@ -78,7 +87,15 @@ class TweetCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
   
-  func onReplyButton() {
+  func onReply() {
     delegate?.tweetCell?(self)
+  }
+  
+  func onRetweet() {
+    delegate?.tweetCell?(self, buttonTouched: retweetButton, didRetweetStatus: tweet.id!)
+  }
+  
+  func onFavorite() {
+    delegate?.tweetCell?(self, buttonTouched: favoriteButton, didFavoriteStatus: tweet.id!)
   }
 }

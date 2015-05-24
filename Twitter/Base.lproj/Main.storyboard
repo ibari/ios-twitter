@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Login-->
+        <!--Twitter-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,20 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z79-N2-sEW">
-                                <rect key="frame" x="100" y="214" width="121" height="30"/>
-                                <state key="normal" title="Login with Twitter">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z79-N2-sEW">
+                                <rect key="frame" x="80" y="269" width="160" height="30"/>
+                                <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="VsP-P0-B8g"/>
+                                    <constraint firstAttribute="height" constant="30" id="jve-sg-gNu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="onLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v1h-OP-k5f"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="z79-N2-sEW" secondAttribute="centerX" id="cTu-lH-Gag"/>
+                            <constraint firstAttribute="centerY" secondItem="z79-N2-sEW" secondAttribute="centerY" id="i3J-Bo-1WJ"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="UZa-Mp-7JS"/>
+                    <navigationItem key="navigationItem" title="Twitter" id="UZa-Mp-7JS"/>
                     <connections>
+                        <outlet property="loginButton" destination="z79-N2-sEW" id="wdC-o2-N20"/>
                         <segue destination="Dry-nX-KoF" kind="modal" identifier="loginSegue" id="HtH-Yh-hW8"/>
                     </connections>
                 </viewController>
@@ -314,8 +323,8 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GeN-B4-TyW">
-                                        <rect key="frame" x="16" y="16" width="288" height="80"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GeN-B4-TyW">
+                                        <rect key="frame" x="16" y="14" width="288" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="288" id="gbF-fd-dcj"/>
@@ -404,11 +413,10 @@
             </objects>
             <point key="canvasLocation" x="2668" y="328"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tweets Navigation Controller-->
         <scene sceneID="agq-q7-JKd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oiM-H6-ns8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Timeline" automaticallyAdjustsScrollViewInsets="NO" id="Dry-nX-KoF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Dry-nX-KoF" customClass="TweetsNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e9P-rk-VI9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -424,6 +432,7 @@
                         <segue destination="laX-w7-dqY" kind="relationship" relationship="rootViewController" id="KVU-u7-9Ii"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oiM-H6-ns8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1428" y="328"/>
         </scene>
