@@ -119,6 +119,7 @@ extension TweetsViewController: TweetCellDelegate {
   func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didRetweetStatus statusId: Int) {
     TwitterClient.sharedInstance.retweetWithParams(statusId, params: nil, completion: { (status, error) -> () in
       if error == nil {
+        tweetCell.tweet.retweeted = true
         button.setImage(UIImage(named: "retweet_on"), forState: .Normal)
       }
     })
@@ -127,6 +128,7 @@ extension TweetsViewController: TweetCellDelegate {
   func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didFavoriteStatus statusId: Int) {
     TwitterClient.sharedInstance.favoritesWithParams(["id" : statusId], completion: { (status, error) -> () in
       if error == nil {
+        tweetCell.tweet.favorited = true
         button.setImage(UIImage(named: "favorite_on"), forState: .Normal)
       }
     })

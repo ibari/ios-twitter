@@ -51,7 +51,7 @@ class TweetCell: UITableViewCell {
         }
       }
       
-      if User.currentUser!.screenName! == tweet.user!.screenName! {
+      if User.currentUser!.id! == tweet.user!.id! {
         retweetButton.enabled = false
       }
       

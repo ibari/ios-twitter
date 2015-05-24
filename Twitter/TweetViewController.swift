@@ -36,7 +36,7 @@ class TweetViewController: UIViewController {
       replyButton.enabled = false
     }
     
-    if User.currentUser!.screenName! == tweet.user!.screenName! {
+    if User.currentUser!.id! == tweet.user!.id! {
       retweetButton.enabled = false
     } else if let retweeted = tweet.retweeted {
       if retweeted == true {
