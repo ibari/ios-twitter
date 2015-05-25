@@ -15,16 +15,12 @@ class ComposeViewController: UIViewController {
   @IBOutlet weak var tweetTextView: UITextView!
   @IBOutlet weak var tweetButton: UIButton!
   
-  var user: User! {
-    didSet {
-      profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
-      nameLabel.text = User.currentUser!.name
-      screenNameLabel.text = "@\(User.currentUser!.screenName!)"
-    }
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
+    nameLabel.text = User.currentUser!.name
+    screenNameLabel.text = "@\(User.currentUser!.screenName!)"
 
     tweetTextView.layer.cornerRadius = 3
     tweetTextView.clipsToBounds = true

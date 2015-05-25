@@ -117,7 +117,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdN-3c-Nok">
-                                                    <rect key="frame" x="96" y="94" width="19" height="16"/>
+                                                    <rect key="frame" x="116" y="94" width="19" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="nCx-Jj-WIg"/>
                                                         <constraint firstAttribute="width" constant="19" id="tMs-Kn-kb4"/>
@@ -128,7 +128,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6p-Xi-tWo">
-                                                    <rect key="frame" x="155" y="94" width="16" height="16"/>
+                                                    <rect key="frame" x="195" y="94" width="16" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="AM7-4g-AMD"/>
                                                         <constraint firstAttribute="height" constant="16" id="kJ9-w4-B0Z"/>
@@ -159,7 +159,7 @@
                                                 <constraint firstItem="ZGa-wx-6MN" firstAttribute="leading" secondItem="Nz4-DH-vnB" secondAttribute="trailing" constant="8" id="S1a-F7-Opf"/>
                                                 <constraint firstItem="MBO-mT-qHP" firstAttribute="top" secondItem="mj5-oP-yVg" secondAttribute="bottom" constant="4" id="V2H-PQ-8Ie"/>
                                                 <constraint firstItem="mj5-oP-yVg" firstAttribute="top" secondItem="MpK-gC-Tqe" secondAttribute="top" constant="8" id="WiD-QR-xtV"/>
-                                                <constraint firstItem="zdN-3c-Nok" firstAttribute="leading" secondItem="st4-R0-x78" secondAttribute="trailing" constant="40" id="Zcd-1o-XOs"/>
+                                                <constraint firstItem="zdN-3c-Nok" firstAttribute="leading" secondItem="st4-R0-x78" secondAttribute="trailing" constant="60" id="Zcd-1o-XOs"/>
                                                 <constraint firstItem="XZF-E9-MuB" firstAttribute="leading" secondItem="ZGa-wx-6MN" secondAttribute="trailing" constant="8" id="aPO-rz-c6D"/>
                                                 <constraint firstItem="st4-R0-x78" firstAttribute="leading" secondItem="MpK-gC-Tqe" secondAttribute="leading" constant="40" id="b1F-0W-H0Y"/>
                                                 <constraint firstItem="st4-R0-x78" firstAttribute="centerY" secondItem="zdN-3c-Nok" secondAttribute="centerY" id="cgG-0i-K0i"/>
@@ -167,7 +167,7 @@
                                                 <constraint firstItem="WVx-2z-5Wd" firstAttribute="top" secondItem="ZGa-wx-6MN" secondAttribute="bottom" constant="4" id="hEx-57-gkm"/>
                                                 <constraint firstItem="mj5-oP-yVg" firstAttribute="leading" secondItem="MpK-gC-Tqe" secondAttribute="leading" constant="18" id="s9v-zd-NDD"/>
                                                 <constraint firstItem="ZGa-wx-6MN" firstAttribute="centerY" secondItem="Nz4-DH-vnB" secondAttribute="centerY" id="sVu-oN-evp"/>
-                                                <constraint firstItem="G6p-Xi-tWo" firstAttribute="leading" secondItem="zdN-3c-Nok" secondAttribute="trailing" constant="40" id="x9x-fT-mqu"/>
+                                                <constraint firstItem="G6p-Xi-tWo" firstAttribute="leading" secondItem="zdN-3c-Nok" secondAttribute="trailing" constant="60" id="x9x-fT-mqu"/>
                                                 <constraint firstItem="Nz4-DH-vnB" firstAttribute="leading" secondItem="MBO-mT-qHP" secondAttribute="trailing" constant="8" id="ybG-Uy-8DT"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -527,7 +527,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="DXP-uc-yTV" id="YM4-Yd-hz5"/>
-                        <outlet property="profileImageView" destination="7tt-fn-WmR" id="5gk-Qz-A7K"/>
+                        <outlet property="profileImageView" destination="7tt-fn-WmR" id="jZx-aF-amT"/>
                         <outlet property="screenNameLabel" destination="8Af-ab-huL" id="dMh-sa-hEU"/>
                         <outlet property="tweetButton" destination="2G8-lY-7ch" id="doT-an-xjs"/>
                         <outlet property="tweetTextView" destination="QuX-ZC-WU9" id="bjN-Dc-qV6"/>
