@@ -28,6 +28,9 @@ class ComposeViewController: UIViewController {
     tweetButton.layer.cornerRadius = 3
     tweetButton.clipsToBounds = true
     
+    nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
+    screenNameLabel.preferredMaxLayoutWidth = screenNameLabel.frame.size.width
+    
     tweetTextView.delegate = self
     
     let tapRecognizer = UITapGestureRecognizer()
@@ -62,16 +65,6 @@ class ComposeViewController: UIViewController {
   func didTapView(){
     self.view.endEditing(true)
   }
-  
-  /*
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
-  }
-  */
 }
 
 extension ComposeViewController: UITextViewDelegate {

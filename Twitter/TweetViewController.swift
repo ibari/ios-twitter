@@ -85,7 +85,6 @@ class TweetViewController: UIViewController {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   @IBAction func onHomeButton(sender: AnyObject) {
@@ -109,6 +108,7 @@ class TweetViewController: UIViewController {
   func onReply() {
     replyView.hidden = false
     replyButton.enabled = false
+    self.title = "Reply to @\(tweet.user!.screenName!)"
   }
   
   func onRetweet() {
