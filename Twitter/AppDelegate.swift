@@ -14,15 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var storyboard = UIStoryboard(name: "Main", bundle: nil)
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    UINavigationBar.appearance().barTintColor = UIColor(red: 113.0/255.0, green: 183.0/255.0, blue: 231.0/255.0, alpha: 1.0)
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+    
+    let font = UIFont(name: "HelveticaNeue", size:15.0)!
+    UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName:font,NSForegroundColorAttributeName:UIColor.whiteColor()], forState: UIControlState.Normal)
+    
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
     
     if User.currentUser != nil {
       println("Current user: \(User.currentUser!.name!)")
       
-      var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
-      
+      var vc = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
       let navigationController = UINavigationController(rootViewController: vc)
       window?.rootViewController = navigationController
     }

@@ -45,21 +45,17 @@ class ComposeViewController: UIViewController {
   }
   
   @IBAction func onCancel(sender: AnyObject) {
-    self.pushTweetsViewController()
+    self.navigationController?.popViewControllerAnimated(true)
   }
   
   func onTweet() {
     TwitterClient.sharedInstance.updateWithParams(["status" : tweetTextView.text], completion: { (status, error) -> () in
       self.tweetTextView.resignFirstResponder()
-      self.pushTweetsViewController()
+      
+      var menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+      
+      self.navigationController?.pushViewController(menuViewController, animated: true)
     })
-  }
-  
-  func pushTweetsViewController() {
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
-    
-    self.navigationController?.pushViewController(tweetsViewController, animated: true)
   }
   
   func didTapView(){

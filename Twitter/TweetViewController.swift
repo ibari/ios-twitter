@@ -88,7 +88,7 @@ class TweetViewController: UIViewController {
   }
   
   @IBAction func onHomeButton(sender: AnyObject) {
-    pushTweetsViewController()
+    pushMenuViewController()
   }
   
   @IBAction func onCompose(sender: AnyObject) {
@@ -98,11 +98,11 @@ class TweetViewController: UIViewController {
     self.navigationController?.pushViewController(composeViewController, animated: true)
   }
   
-  func pushTweetsViewController() {
+  func pushMenuViewController() {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+    var menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
     
-    self.navigationController?.pushViewController(tweetsViewController, animated: true)
+    self.navigationController?.pushViewController(menuViewController, animated: true)
   }
   
   func onReply() {
@@ -130,7 +130,7 @@ class TweetViewController: UIViewController {
   func onTweet() {
     TwitterClient.sharedInstance.updateWithParams(["status" : tweetTextView.text, "in_reply_to_status_id" : tweet.id!], completion: { (status, error) -> () in
       self.tweetTextView.resignFirstResponder()
-      self.pushTweetsViewController()
+      self.pushMenuViewController()
     })
   }
   

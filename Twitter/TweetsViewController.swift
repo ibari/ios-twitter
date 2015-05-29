@@ -14,9 +14,11 @@ class TweetsViewController: UIViewController {
   var tweets: [Tweet]?
   var refreshControl: UIRefreshControl!
   let tweetSegueIdentifier = "ShowTweetSegue"
-  
+ 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    configureToolbar()
     
     MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     
@@ -57,15 +59,22 @@ class TweetsViewController: UIViewController {
     })
   }
 
-  @IBAction func onLogout(sender: AnyObject) {
+  func logout() {
     User.currentUser?.logout()
   }
   
-  @IBAction func onCompose(sender: AnyObject) {
+  func compose(sender: AnyObject) {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var composeViewController = storyboard.instantiateViewControllerWithIdentifier("ComposeViewController") as! ComposeViewController
+    var composeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ComposeViewController") as! ComposeViewController
     
     self.navigationController?.pushViewController(composeViewController, animated: true)
+  }
+  
+  // MARK: Configuration
+  func configureToolbar() {
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .Plain, target: self, action: "logout")
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Compose", comment: ""), style: .Plain, target: self, action: "compose")
   }
   
   // MARK: - Navigation
