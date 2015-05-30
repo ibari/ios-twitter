@@ -25,6 +25,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var replyButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
+  @IBOutlet weak var profileImageVerticalSpaceConstraint: NSLayoutConstraint!
   
   weak var delegate: TweetCellDelegate?
   
@@ -46,9 +47,9 @@ class TweetCell: UITableViewCell {
           retweetButton.setImage(UIImage(named: "retweet_on"), forState: .Normal)
           retweetButton.enabled = false
         } else {
-          retweetLabel.text = ""
-          //retweetImageView.hidden = true
-          //retweetLabel.hidden = true
+          retweetImageView.hidden = true
+          retweetLabel.hidden = true
+          profileImageVerticalSpaceConstraint.constant = 8
         }
       }
       

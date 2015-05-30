@@ -68,13 +68,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fy1-7w-tKL" id="MpK-gC-Tqe">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MBO-mT-qHP">
-                                                    <rect key="frame" x="8" y="27" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="1nr-Hp-v5C"/>
-                                                        <constraint firstAttribute="height" constant="24" id="hGr-cQ-VRs"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SFGate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz4-DH-vnB">
                                                     <rect key="frame" x="40" y="27" width="49" height="17"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -144,8 +137,16 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MBO-mT-qHP">
+                                                    <rect key="frame" x="8" y="27" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="1nr-Hp-v5C"/>
+                                                        <constraint firstAttribute="height" constant="24" id="hGr-cQ-VRs"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="MBO-mT-qHP" firstAttribute="top" secondItem="MpK-gC-Tqe" secondAttribute="top" constant="27" id="1Aw-j3-Bn5"/>
                                                 <constraint firstItem="WVx-2z-5Wd" firstAttribute="leading" secondItem="MBO-mT-qHP" secondAttribute="trailing" constant="8" id="1Wf-7o-c3t"/>
                                                 <constraint firstItem="st4-R0-x78" firstAttribute="top" secondItem="WVx-2z-5Wd" secondAttribute="bottom" constant="4" id="4If-Tg-GyL"/>
                                                 <constraint firstItem="mj5-oP-yVg" firstAttribute="centerY" secondItem="AvN-rs-R41" secondAttribute="centerY" id="4RG-ER-u9g"/>
@@ -157,7 +158,6 @@
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBO-mT-qHP" secondAttribute="bottom" constant="10" id="Pzw-u7-i7Z"/>
                                                 <constraint firstItem="MBO-mT-qHP" firstAttribute="leading" secondItem="MpK-gC-Tqe" secondAttribute="leading" constant="8" id="S0C-7x-sxb"/>
                                                 <constraint firstItem="ZGa-wx-6MN" firstAttribute="leading" secondItem="Nz4-DH-vnB" secondAttribute="trailing" constant="8" id="S1a-F7-Opf"/>
-                                                <constraint firstItem="MBO-mT-qHP" firstAttribute="top" secondItem="mj5-oP-yVg" secondAttribute="bottom" constant="4" id="V2H-PQ-8Ie"/>
                                                 <constraint firstItem="mj5-oP-yVg" firstAttribute="top" secondItem="MpK-gC-Tqe" secondAttribute="top" constant="8" id="WiD-QR-xtV"/>
                                                 <constraint firstItem="zdN-3c-Nok" firstAttribute="leading" secondItem="st4-R0-x78" secondAttribute="trailing" constant="60" id="Zcd-1o-XOs"/>
                                                 <constraint firstItem="XZF-E9-MuB" firstAttribute="leading" secondItem="ZGa-wx-6MN" secondAttribute="trailing" constant="8" id="aPO-rz-c6D"/>
@@ -175,6 +175,7 @@
                                             <outlet property="createdAtLabel" destination="XZF-E9-MuB" id="vkx-QW-Wa3"/>
                                             <outlet property="favoriteButton" destination="G6p-Xi-tWo" id="mLr-qK-fCv"/>
                                             <outlet property="nameLabel" destination="Nz4-DH-vnB" id="yQd-bD-qew"/>
+                                            <outlet property="profileImageVerticalSpaceConstraint" destination="1Aw-j3-Bn5" id="k1p-PX-T0i"/>
                                             <outlet property="profileImageView" destination="MBO-mT-qHP" id="dk6-Uz-Tlq"/>
                                             <outlet property="replyButton" destination="st4-R0-x78" id="c9l-E7-e5e"/>
                                             <outlet property="retweetButton" destination="zdN-3c-Nok" id="Y2x-gt-32t"/>
@@ -865,6 +866,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="inl-FK-kPy"/>
+        <segue reference="RnB-zr-B55"/>
     </inferredMetricsTieBreakers>
 </document>
