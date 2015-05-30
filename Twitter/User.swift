@@ -18,6 +18,10 @@ class User: NSObject {
   var name: String?
   var screenName: String?
   var profileImageURL: NSURL?
+  var profileBackgroundImageURL: NSURL?
+  var statusesCount: Int?
+  var followersCount: Int?
+  var friendsCount: Int?
   var dictionary: NSDictionary?
   
   init(dictionary: NSDictionary) {
@@ -32,6 +36,17 @@ class User: NSObject {
     } else {
       profileImageURL = nil
     }
+    
+    let profileBackgroundImageURLString = dictionary["profile_background_image_url"] as? String
+    if profileBackgroundImageURLString != nil {
+      profileBackgroundImageURL = NSURL(string: profileBackgroundImageURLString!)!
+    } else {
+      profileBackgroundImageURL = nil
+    }
+    
+    statusesCount = dictionary["statuses_count"] as? Int
+    followersCount = dictionary["followers_count"] as? Int
+    friendsCount = dictionary["friends_count"] as? Int
   }
   
   func logout() {

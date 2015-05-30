@@ -54,7 +54,7 @@ class MenuViewController: UIViewController {
     
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+    //tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     tableView.rowHeight =  50
     tableView.reloadData()
     
@@ -63,7 +63,7 @@ class MenuViewController: UIViewController {
     self.tableView.backgroundColor = UIColor.clearColor()
     
     self.activeViewXConstraint.constant = 0
-    self.activeViewController = self.viewControllerArray.first
+    self.activeViewController = self.viewControllerArray[1]
     updateActiveViewController()
   }
   
@@ -72,15 +72,19 @@ class MenuViewController: UIViewController {
   }
   
   func initViewControllers() {
-    // tweets
-    let vc1 = storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
+    // profile
+    let vc1 = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
     let nc1 = UINavigationController(rootViewController: vc1)
     
-    // mentions
-    let vc2 = storyboard!.instantiateViewControllerWithIdentifier("MentionsViewController") as! MentionsViewController
+    // tweets
+    let vc2 = storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
     let nc2 = UINavigationController(rootViewController: vc2)
     
-    viewControllerArray = [nc1, nc2]
+    // mentions
+    let vc3 = storyboard!.instantiateViewControllerWithIdentifier("MentionsViewController") as! MentionsViewController
+    let nc3 = UINavigationController(rootViewController: vc3)
+    
+    viewControllerArray = [nc1, nc2, nc3]
   }
   
   private func removeInactiveViewController(inactiveViewController: UIViewController?) {
