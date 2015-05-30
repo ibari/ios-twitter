@@ -1,20 +1,20 @@
 //
-//  TweetsViewController.swift
+//  MentionsViewController.swift
 //  Twitter
 //
-//  Created by Ian on 5/21/15.
+//  Created by Ian on 5/29/15.
 //  Copyright (c) 2015 Ian Bari. All rights reserved.
 //
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class MentionsViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   var tweets: [Tweet]?
   var refreshControl: UIRefreshControl!
   let tweetSegueIdentifier = "tweetSegue"
- 
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -27,11 +27,15 @@ class TweetsViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 100
     
+    var mentionsBackgroundView = UIView(frame: CGRectZero)
+    self.tableView.tableFooterView = mentionsBackgroundView
+    self.tableView.backgroundColor = UIColor.clearColor()
+    
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
     tableView.insertSubview(refreshControl, atIndex: 0)
     
-    TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
+    TwitterClient.sharedInstance.mentionsTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
       self.tweets = tweets
       self.tableView.reloadData()
       
@@ -58,7 +62,7 @@ class TweetsViewController: UIViewController {
       self.refreshControl.endRefreshing()
     })
   }
-
+  
   func logout() {
     User.currentUser?.logout()
   }
@@ -96,13 +100,13 @@ class TweetsViewController: UIViewController {
   }
 }
 
-extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
+extension MentionsViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
     
     cell.tweet = tweets![indexPath.row]
     cell.delegate = self
-
+    
     return cell
   }
   
@@ -120,7 +124,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-extension TweetsViewController: TweetCellDelegate {
+extension MentionsViewController: TweetCellDelegate {
   func tweetCell(tweetCell: TweetCell) {
     self.performSegueWithIdentifier(tweetSegueIdentifier, sender: tweetCell)
   }

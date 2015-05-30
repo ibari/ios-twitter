@@ -69,25 +69,16 @@ class MenuViewController: UIViewController {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   func initViewControllers() {
     let vc1 = storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
     let nc1 = UINavigationController(rootViewController: vc1)
     
-    /*let vc2 = UIViewController()
-    let vc3 = UIViewController()
+    let vc2 = storyboard!.instantiateViewControllerWithIdentifier("MentionsViewController") as! MentionsViewController
+    let nc2 = UINavigationController(rootViewController: vc2)
     
-    vc1.view.backgroundColor = UIColor.redColor()
-    vc2.view.backgroundColor = UIColor.greenColor()
-    vc3.view.backgroundColor = UIColor.blueColor()*/
-    
-    vc1.title = "Timeline"
-    //vc2.title = "Two"
-    //vc3.title = "Three"
-    
-    viewControllerArray = [nc1]
+    viewControllerArray = [nc1, nc2]
   }
   
   private func removeInactiveViewController(inactiveViewController: UIViewController?) {
@@ -138,7 +129,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("TableViewCell", forIndexPath: indexPath) as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! UITableViewCell
     cell.textLabel?.text = viewControllerArray[indexPath.row].title
     return cell
   }
