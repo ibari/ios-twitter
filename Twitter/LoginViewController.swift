@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    loginButton.layer.cornerRadius = 3
+    loginButton.layer.cornerRadius = 5
     loginButton.clipsToBounds = true
     loginButton.addTarget(self, action: "onLogin", forControlEvents: UIControlEvents.TouchUpInside)
   }
