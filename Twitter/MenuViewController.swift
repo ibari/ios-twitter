@@ -72,9 +72,11 @@ class MenuViewController: UIViewController {
   }
   
   func initViewControllers() {
+    // tweets
     let vc1 = storyboard!.instantiateViewControllerWithIdentifier("TweetsViewController") as! TweetsViewController
     let nc1 = UINavigationController(rootViewController: vc1)
     
+    // mentions
     let vc2 = storyboard!.instantiateViewControllerWithIdentifier("MentionsViewController") as! MentionsViewController
     let nc2 = UINavigationController(rootViewController: vc2)
     
@@ -98,7 +100,6 @@ class MenuViewController: UIViewController {
         activeVC.view.frame = activeViewContainer.bounds
         activeViewContainer.addSubview(activeVC.view)
         self.navigationItem.title = activeVC.title
-        //self.navigationItem.title = "Home"
         activeVC.didMoveToParentViewController(self)
       }
     }

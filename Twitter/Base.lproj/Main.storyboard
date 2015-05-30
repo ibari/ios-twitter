@@ -241,7 +241,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TiZ-TG-h25">
-                                <rect key="frame" x="200" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -255,7 +255,7 @@
                             <constraint firstAttribute="centerY" secondItem="TiZ-TG-h25" secondAttribute="centerY" id="ZlM-S4-FqU"/>
                             <constraint firstItem="TiZ-TG-h25" firstAttribute="height" secondItem="ecc-uZ-5cs" secondAttribute="height" id="cIn-X0-N94"/>
                             <constraint firstItem="MxD-U8-SCX" firstAttribute="top" secondItem="ecc-uZ-5cs" secondAttribute="top" id="jcl-VT-Z1N"/>
-                            <constraint firstAttribute="centerX" secondItem="TiZ-TG-h25" secondAttribute="centerX" constant="-200" id="lna-JG-xCc"/>
+                            <constraint firstAttribute="centerX" secondItem="TiZ-TG-h25" secondAttribute="centerX" id="lna-JG-xCc"/>
                             <constraint firstAttribute="bottom" secondItem="MxD-U8-SCX" secondAttribute="bottom" id="pVr-p8-XGx"/>
                             <constraint firstItem="MxD-U8-SCX" firstAttribute="leading" secondItem="ecc-uZ-5cs" secondAttribute="leading" id="yyF-lB-v6S"/>
                         </constraints>
@@ -839,6 +839,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3N9-yX-0Ym">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.4431372549" green="0.71764705880000002" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -861,6 +865,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="RnB-zr-B55"/>
+        <segue reference="inl-FK-kPy"/>
     </inferredMetricsTieBreakers>
 </document>
