@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
   @IBOutlet weak var friendsCountLabel: UILabel!
   @IBOutlet weak var followersCountLabel: UILabel!
   
+  var user: User?
   var tweets: [Tweet]?
   var refreshControl: UIRefreshControl!
   let tweetSegueIdentifier = "tweetSegue"
@@ -27,13 +28,13 @@ class ProfileViewController: UIViewController {
     
     configureToolbar()
     
-    profileBackgroundImageView.setImageWithURL(User.currentUser!.profileBackgroundImageURL!)
-    statusesCountLabel.text = String(stringInterpolationSegment: User.currentUser!.statusesCount!)
-    friendsCountLabel.text = String(stringInterpolationSegment: User.currentUser!.friendsCount!)
-    followersCountLabel.text = String(stringInterpolationSegment: User.currentUser!.followersCount!)
-    profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
-    nameLabel.text = User.currentUser!.name
-    screenNameLabel.text = "@\(User.currentUser!.screenName!)"
+    profileBackgroundImageView.setImageWithURL(user!.profileBackgroundImageURL!)
+    statusesCountLabel.text = String(stringInterpolationSegment: user!.statusesCount!)
+    friendsCountLabel.text = String(stringInterpolationSegment: user!.friendsCount!)
+    followersCountLabel.text = String(stringInterpolationSegment: user!.followersCount!)
+    profileImageView.setImageWithURL(user!.profileImageURL!)
+    nameLabel.text = user!.name
+    screenNameLabel.text = "@\(user!.screenName!)"
     
     profileImageView.layer.cornerRadius = 5
     profileImageView.clipsToBounds = true
@@ -151,5 +152,13 @@ extension ProfileViewController: TweetCellDelegate {
         button.setImage(UIImage(named: "favorite_on"), forState: .Normal)
       }
     })
+  }
+  
+  func tweetCell(tweetCell: TweetCell, didTapProfileImage user: User) {
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var pvc = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+    
+    pvc.user = user
+    self.navigationController?.pushViewController(pvc, animated: true)
   }
 }

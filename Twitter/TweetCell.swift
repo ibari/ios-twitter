@@ -12,6 +12,7 @@ import UIKit
   optional func tweetCell(tweetCell: TweetCell)
   optional func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didRetweetStatus statusId: Int)
   optional func tweetCell(tweetCell: TweetCell, buttonTouched button: UIButton, didFavoriteStatus statusId: Int)
+  optional func tweetCell(tweetCell: TweetCell, didTapProfileImage user: User)
 }
 
 class TweetCell: UITableViewCell {
@@ -28,6 +29,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var profileImageVerticalSpaceConstraint: NSLayoutConstraint!
   
   weak var delegate: TweetCellDelegate?
+  let tapRec = UITapGestureRecognizer()
   
   var tweet: Tweet! {
     didSet {
@@ -73,6 +75,9 @@ class TweetCell: UITableViewCell {
     
     nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+
+    tapRec.addTarget(self, action: "onProfile")
+    profileImageView.addGestureRecognizer(tapRec)
     
     replyButton.addTarget(self, action: "onReply", forControlEvents: UIControlEvents.TouchUpInside)
     retweetButton.addTarget(self, action: "onRetweet", forControlEvents: UIControlEvents.TouchUpInside)
@@ -100,5 +105,9 @@ class TweetCell: UITableViewCell {
   
   func onFavorite() {
     delegate?.tweetCell?(self, buttonTouched: favoriteButton, didFavoriteStatus: tweet.id!)
+  }
+  
+  func onProfile() {
+    delegate?.tweetCell?(self, didTapProfileImage: tweet.user!)
   }
 }

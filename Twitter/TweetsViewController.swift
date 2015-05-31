@@ -134,4 +134,12 @@ extension TweetsViewController: TweetCellDelegate {
       }
     })
   }
+  
+  func tweetCell(tweetCell: TweetCell, didTapProfileImage user: User) {
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var pvc = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+    
+    pvc.user = user
+    self.navigationController?.pushViewController(pvc, animated: true)
+  }
 }

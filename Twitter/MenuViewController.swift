@@ -41,7 +41,7 @@ class MenuViewController: UIViewController {
       
       // set the active view controller to the first one in the new array if the current one is not in there
       if activeViewController == nil || find(viewControllerArray, activeViewController!) == nil {
-        activeViewController = viewControllerArray.first
+        activeViewController = viewControllerArray[1]
       }
     }
   }
@@ -73,6 +73,7 @@ class MenuViewController: UIViewController {
   func initViewControllers() {
     // profile
     let vc1 = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+    vc1.user = User.currentUser!
     let nc1 = UINavigationController(rootViewController: vc1)
     
     // tweets
