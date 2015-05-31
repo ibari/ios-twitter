@@ -86,9 +86,9 @@ class TweetViewController: UIViewController {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
-  
-  @IBAction func onHomeButton(sender: AnyObject) {
-    pushMenuViewController()
+
+  @IBAction func didTapBackButton(sender: AnyObject) {
+    dismissViewControllerAnimated(true, completion: nil)
   }
   
   @IBAction func onCompose(sender: AnyObject) {
@@ -96,13 +96,6 @@ class TweetViewController: UIViewController {
     var composeViewController = storyboard.instantiateViewControllerWithIdentifier("ComposeViewController") as! ComposeViewController
     
     self.navigationController?.pushViewController(composeViewController, animated: true)
-  }
-  
-  func pushMenuViewController() {
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-    
-    self.navigationController?.pushViewController(menuViewController, animated: true)
   }
   
   func onReply() {
@@ -130,7 +123,8 @@ class TweetViewController: UIViewController {
   func onTweet() {
     TwitterClient.sharedInstance.updateWithParams(["status" : tweetTextView.text, "in_reply_to_status_id" : tweet.id!], completion: { (status, error) -> () in
       self.tweetTextView.resignFirstResponder()
-      self.pushMenuViewController()
+      
+      self.dismissViewControllerAnimated(true, completion: nil)
     })
   }
   

@@ -54,7 +54,6 @@ class MenuViewController: UIViewController {
     
     tableView.dataSource = self
     tableView.delegate = self
-    //tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
     tableView.rowHeight =  50
     tableView.reloadData()
     

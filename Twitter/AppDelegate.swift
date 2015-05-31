@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
     UINavigationBar.appearance().barTintColor = UIColor(red: 88.0/255.0, green: 184.0/255.0, blue: 241.0/255.0, alpha: 1.0)
-    //rUINavigationBar.appearance().backgroundColor = UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/238.0, alpha: 1.0)
-
     UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     
     let font = UIFont(name: "HelveticaNeue", size:15.0)!

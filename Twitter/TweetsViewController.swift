@@ -20,8 +20,6 @@ class TweetsViewController: UIViewController {
     
     configureToolbar()
     
-    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-    
     tableView.dataSource = self
     tableView.delegate = self
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -30,6 +28,8 @@ class TweetsViewController: UIViewController {
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
     tableView.insertSubview(refreshControl, atIndex: 0)
+    
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     
     TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
       self.tweets = tweets
@@ -43,18 +43,10 @@ class TweetsViewController: UIViewController {
     super.didReceiveMemoryWarning()
   }
   
-  func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-      dispatch_time(
-        DISPATCH_TIME_NOW,
-        Int64(delay * Double(NSEC_PER_SEC))
-      ),
-      dispatch_get_main_queue(), closure
-    )
-  }
-  
   func onRefresh() {
-    delay(2, closure: {
+    TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
+      self.tweets = tweets
+      self.tableView.reloadData()
       self.refreshControl.endRefreshing()
     })
   }

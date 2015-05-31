@@ -49,7 +49,7 @@ class TweetCell: UITableViewCell {
         } else {
           retweetImageView.hidden = true
           retweetLabel.hidden = true
-          profileImageVerticalSpaceConstraint.constant = 8
+          profileImageVerticalSpaceConstraint?.constant = 8
         }
       }
       

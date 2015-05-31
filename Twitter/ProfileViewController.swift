@@ -11,6 +11,9 @@ import UIKit
 class ProfileViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var profileBackgroundImageView: UIImageView!
+  @IBOutlet weak var profileImageView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var screenNameLabel: UILabel!
   @IBOutlet weak var statusesCountLabel: UILabel!
   @IBOutlet weak var friendsCountLabel: UILabel!
   @IBOutlet weak var followersCountLabel: UILabel!
@@ -28,16 +31,13 @@ class ProfileViewController: UIViewController {
     statusesCountLabel.text = String(stringInterpolationSegment: User.currentUser!.statusesCount!)
     friendsCountLabel.text = String(stringInterpolationSegment: User.currentUser!.friendsCount!)
     followersCountLabel.text = String(stringInterpolationSegment: User.currentUser!.followersCount!)
+    profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
+    nameLabel.text = User.currentUser!.name
+    screenNameLabel.text = "@\(User.currentUser!.screenName!)"
     
-    //profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
-    //nameLabel.text = User.currentUser!.name
-    //screenNameLabel.text = "@\(User.currentUser!.screenName!)"
-    
-    
-    
-    
-    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-    
+    profileImageView.layer.cornerRadius = 5
+    profileImageView.clipsToBounds = true
+
     tableView.dataSource = self
     tableView.delegate = self
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -46,6 +46,8 @@ class ProfileViewController: UIViewController {
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
     tableView.insertSubview(refreshControl, atIndex: 0)
+    
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     
     TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
       self.tweets = tweets
@@ -59,18 +61,10 @@ class ProfileViewController: UIViewController {
     super.didReceiveMemoryWarning()
   }
   
-  func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-      dispatch_time(
-        DISPATCH_TIME_NOW,
-        Int64(delay * Double(NSEC_PER_SEC))
-      ),
-      dispatch_get_main_queue(), closure
-    )
-  }
-  
   func onRefresh() {
-    delay(2, closure: {
+    TwitterClient.sharedInstance.homeTimelineWithParams(["count" : 20], completion: { (tweets, error) -> () in
+      self.tweets = tweets
+      self.tableView.reloadData()
       self.refreshControl.endRefreshing()
     })
   }

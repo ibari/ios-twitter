@@ -21,6 +21,9 @@ class ComposeViewController: UIViewController {
     profileImageView.setImageWithURL(User.currentUser!.profileImageURL!)
     nameLabel.text = User.currentUser!.name
     screenNameLabel.text = "@\(User.currentUser!.screenName!)"
+    
+    profileImageView.layer.cornerRadius = 5
+    profileImageView.clipsToBounds = true
 
     tweetTextView.layer.cornerRadius = 3
     tweetTextView.clipsToBounds = true
